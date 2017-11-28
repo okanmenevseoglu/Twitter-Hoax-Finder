@@ -23,18 +23,28 @@ public class ImageUtils {
         String savePath = "";
 
         try {
+            validateIfImage(image);
+
             byte[] bytes = image.getBytes();
             Date currentDate = new Date();
             savePath = UPLOAD_FOLDER + currentDate.getTime() + image.getOriginalFilename();
             Path path = Paths.get(savePath);
             Path parentDir = path.getParent();
+
             createParentDirsIfNotExists(parentDir);
+
             Files.write(path, bytes);
         } catch (IOException e) {
             LOGGER.log(new LogRecord(Level.SEVERE, e.getMessage()));
         }
 
         return savePath;
+    }
+
+    private void validateIfImage(MultipartFile image) throws IOException {
+        if (!image.getContentType().contains("image")) {
+            throw new IOException("File Type is not image!");
+        }
     }
 
     private void createParentDirsIfNotExists(Path parentDir) throws IOException {
