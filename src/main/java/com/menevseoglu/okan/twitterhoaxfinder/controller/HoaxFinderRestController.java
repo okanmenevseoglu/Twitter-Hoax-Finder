@@ -31,16 +31,16 @@ public class HoaxFinderRestController {
 
     @PostMapping("search/text")
     public List<Tweet> findWhoTweetedItByText(@Valid @RequestBody HoaxFinderSearchRequest hoaxFinderSearchRequest) {
-        return hoaxFinderService.findWhoTweetedIt(hoaxFinderSearchRequest);
+        return hoaxFinderService.findWhoTweetedItByText(hoaxFinderSearchRequest);
     }
 
     @PostMapping("search/text/by-member")
-    public List<Tweet> findIfMemberTweetedThis(@Valid @RequestBody HoaxFinderSearchRequest hoaxFinderSearchRequest) {
-        return hoaxFinderService.findIfMemberTweetedThis(hoaxFinderSearchRequest);
+    public List<Tweet> findIfMemberTweetedThisByText(@Valid @RequestBody HoaxFinderSearchRequest hoaxFinderSearchRequest) {
+        return hoaxFinderService.findIfMemberTweetedThisByText(hoaxFinderSearchRequest);
     }
 
     @PostMapping("search/image")
-    public List<Tweet> findWhoTweetedItByText(@Param("image") MultipartFile image) {
-        return hoaxFinderService.getTweetByImageWithTess(image);
+    public List<Tweet> findWhoTweetedItByImage(@Param("image") MultipartFile image) {
+        return hoaxFinderService.findWhoTweetedItByImage(image);
     }
 }

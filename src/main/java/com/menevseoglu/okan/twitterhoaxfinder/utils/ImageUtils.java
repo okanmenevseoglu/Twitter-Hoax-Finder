@@ -8,6 +8,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Date;
+import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.LogRecord;
 import java.util.logging.Logger;
@@ -42,7 +43,7 @@ public class ImageUtils {
     }
 
     private void validateIfImage(MultipartFile image) throws IOException {
-        if (!image.getContentType().contains("image")) {
+        if (Objects.isNull(image) || !image.getContentType().contains("image")) {
             throw new IOException("File Type is not image!");
         }
     }
