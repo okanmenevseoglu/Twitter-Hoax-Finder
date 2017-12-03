@@ -10,7 +10,6 @@ import org.springframework.social.twitter.api.Tweet;
 import org.springframework.social.twitter.api.Twitter;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import org.thymeleaf.util.StringUtils;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -56,7 +55,7 @@ public class HoaxFinderService {
         List<Tweet> resultList = new ArrayList<>();
 
         for (Tweet tweet : tweets) {
-            if (tweet.getText().contains(StringUtils.substring(query, 0, query.length() / 2))) {
+            if (tweet.getText().contains(query.substring(0, query.length() / 2))) {
                 resultList.add(tweet);
             }
         }
@@ -102,7 +101,7 @@ public class HoaxFinderService {
                 } else {
                     for (Tweet result : resultSet) {
                         String resultText = result.getText();
-                        if (!StringUtils.equals(resultText, tweetText)) {
+                        if (!resultText.equals(tweetText)) {
                             resultSet.add(tweet);
                             break;
                         }
