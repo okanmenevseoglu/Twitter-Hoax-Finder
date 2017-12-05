@@ -1,0 +1,43 @@
+<p-growl [value]="msgs"></p-growl>
+<div class="container">
+  <div class="row main">
+    <div class="panel-heading">
+      <div class="panel-title text-center">
+        <h1 class="title">Twitter Hoax Finder</h1>
+        <br>
+      </div>
+    </div>
+
+    <div *ngIf="!resultTweets" class="main-login main-center">
+      <p id="welcomeTitle">Welcome to Twitter Hoax Finder! Please upload an image to detect hoax.</p>
+      <input type="file" #fileInput placeholder="Upload file..."/>
+      <button type="button" (click)="upload()">Upload</button>
+      <div class="form-group ">
+        <button pButton class="btn btn-primary btn-lg btn-block" id="search" label="Search"></button>
+      </div>
+      <div class="login-register">
+        <a [routerLink]="['text-search']">I want to search text</a>
+      </div>
+    </div>
+
+    <div *ngIf="resultTweets" class="tweet-list">
+      <div class="panel-title text-center">
+        <h2 class="title">This is not a hoax!</h2>
+        <h3 class="title">Here is the list of people who tweeted this.</h3>
+        <br>
+      </div>
+      <div class="tweet-box" *ngFor="let resultTweet of resultTweets" id="{{resultTweet.idStr}}">
+        <a href="https://twitter.com/{{resultTweet.fromUser}}/status/{{resultTweet.idStr}}">
+          <div class="tweet-container">
+            <img class="profile-image" src="{{resultTweet.profileImageUrl}}">
+            <div class="content">
+              <span class="user-fields"><strong>{{resultTweet.fromUser}}</strong> @{{resultTweet.fromUser}}</span>
+              <p class="tweet-text">{{resultTweet.text}}</p>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</div>

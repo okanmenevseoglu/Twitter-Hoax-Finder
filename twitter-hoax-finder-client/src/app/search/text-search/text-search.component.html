@@ -1,0 +1,115 @@
+<div class="container">
+  <div class="row main">
+    <div class="panel-heading">
+      <div class="panel-title text-center">
+        <h1 class="title">Twitter Hoax Finder</h1>
+        <br>
+      </div>
+    </div>
+
+    <div *ngIf="!resultTweets" class="main-login main-center">
+      <p id="welcomeTitle">Welcome to Twitter Hoax Finder! Please fill below form to find some hoaxes.</p>
+      <form [formGroup]="hoaxFinderSearchForm" (submit)="doSearchForTweets()">
+        <div class="form-group">
+          <label for="query" class="cols-sm-2 control-label">Twitter Query*</label>
+          <div class="cols-sm-10">
+            <div class="input-group">
+              <span class="input-group-addon"><i class="fa fa-search fa" aria-hidden="true"></i></span>
+              <textarea pInputTextarea class="form-control" formControlName="query" name="query" id="query"
+                        placeholder="Enter your query for search"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="screenName" class="cols-sm-2 control-label">Twitter User (Optional)</label>
+          <div class="cols-sm-10">
+            <div class="input-group">
+              <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
+              <input type="text" class="form-control" formControlName="screenName" name="screenName" id="screenName"
+                     placeholder="Enter Twitter User"/>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="cols-sm-2 control-label">Tweet Language (Optional)</label>
+          <div class="cols-sm-10">
+            <div class="input-group">
+              <span class="input-group-addon"><i class="fa fa-flag fa" aria-hidden="true"></i></span>
+              <p-radioButton formControlName="lang" class="form-control" inputId="lang" name="lang" value="en"
+                             label="English"></p-radioButton>
+              <p-radioButton formControlName="lang" class="form-control" inputId="lang" name="lang" value="tr"
+                             label="Turkish"></p-radioButton>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group ">
+          <button pButton class="btn btn-primary btn-lg btn-block" id="search" label="Search"></button>
+        </div>
+        <div class="login-register">
+          <a [routerLink]="['image-search']">I want to search image</a>
+        </div>
+      </form>
+    </div>
+
+    <div *ngIf="resultTweets" class="tweet-list">
+      <div class="panel-title text-center">
+        <h2 class="title">This is not a hoax!</h2>
+        <h3 class="title">Here is the list of people who tweeted this.</h3>
+        <br>
+      </div>
+      <div class="tweet-box" *ngFor="let resultTweet of resultTweets" id="{{resultTweet.idStr}}">
+        <a href="https://twitter.com/{{resultTweet.fromUser}}/status/{{resultTweet.idStr}}">
+          <div class="tweet-container">
+            <img class="profile-image" src="{{resultTweet.profileImageUrl}}">
+            <div class="content">
+              <span class="user-fields"><strong>{{resultTweet.fromUser}}</strong><img *ngIf="resultTweet.verified"
+                                                                                      class="verified"
+                                                                                      src="/images/verified.png"> @{{resultTweet.fromUser}}</span>
+              <p class="tweet-text">{{resultTweet.text}}</p>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!--<div class="ui-grid-row" *ngIf="resultTweets">-->
+<!--<p-panel header="Sonuçlar" [style]="{'margin':'10px'}">-->
+<!--<p-dataTable [value]="resultTweets" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]" [responsive]="true">-->
+<!--<p-column field="id" header="Id" [sortable]="true"></p-column>-->
+<!--<p-column field="text" header="Aranan Tweet" [sortable]="true"></p-column>-->
+<!--<p-column field="createdAt" header="Oluşturulma Tarihi" [sortable]="true"></p-column>-->
+<!--<p-column field="fromUser" header="Kullanıcı" [sortable]="true"></p-column>-->
+<!--<p-column field="profileImageUrl" header="Profil Imaj Url," [sortable]="true"></p-column>-->
+<!--<p-column field="inReplyToScreenName" header="Şu Kullanıcıya İtinaden" [sortable]="true"></p-column>-->
+<!--<p-column field="languageCode" header="Dil" [sortable]="true"></p-column>-->
+<!--<p-column field="source" header="Kaynak" [sortable]="true"></p-column>-->
+<!--<p-column field="retweetCount" header="RT sayısı" [sortable]="true"></p-column>-->
+<!--<p-column field="retweetedStatus" header="RT edilen tweet" [sortable]="true"></p-column>-->
+<!--<p-column field="favoriteCount" header="Favori Sayısı" [sortable]="true"></p-column>-->
+<!--</p-dataTable>-->
+<!--</p-panel>-->
+<!--<button style="align-content: center" pButton href="#" label="Geri Dön"></button>-->
+<!--</div>-->
+
+<!--<div class="col-lg-4 col-md-6" *ngFor="let resultTweet of resultTweets">-->
+<!--<div class="card profile-card detached">-->
+<!--<a href="https://twitter.com/ + {{resultTweet.fromUser}}">-->
+<!--<img class="profile-image" src="{{resultTweet.profileImageUrl}}">-->
+<!--<div class="profile-details">-->
+<!--<strong>-->
+<!--{{resultTweet.fromUser}}-->
+<!--<img *ngIf="resultTweet.verified" class="verified" src="text-search.component.html">-->
+<!--</strong>-->
+<!--<p class="light-grey">@{{resultTweet.fromUser}}</p>-->
+<!--</div>-->
+<!--<i class="fa fa-angle-right light-grey" aria-hidden="true"></i>-->
+<!--</a>-->
+<!--</div>-->
+<!--</div>-->
