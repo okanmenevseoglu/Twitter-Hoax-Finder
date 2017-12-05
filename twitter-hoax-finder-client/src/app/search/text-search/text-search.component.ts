@@ -20,7 +20,7 @@ export class TextSearchComponent implements OnInit {
 
   verified: boolean = false;
 
-  constructor(private searchService: SearchService, private formBuilder: FormBuilder, private router: Router) {
+  constructor(private searchService: SearchService, private formBuilder: FormBuilder, private route: Router) {
     this.hoaxFinderSearchForm = this.formBuilder.group({
       query: [''],
       screenName: null,

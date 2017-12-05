@@ -5,8 +5,8 @@ import {ImageSearchComponent} from "./search/image-search/image-search.component
 import {ModuleWithProviders} from "@angular/core";
 
 const appRoutes: Routes = [
-  {path: 'text-search', component: TextSearchComponent},
-  {path: 'image-search', component: ImageSearchComponent},
+  {path: '', component: TextSearchComponent, pathMatch: 'full'},
+  {path: 'image-search', component: ImageSearchComponent, pathMatch: 'full'},
 ];
 
 export const appRoutingProviders: any[] = [];

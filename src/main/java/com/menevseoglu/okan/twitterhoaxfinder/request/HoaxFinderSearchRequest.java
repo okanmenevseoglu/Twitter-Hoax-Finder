@@ -14,9 +14,9 @@ public class HoaxFinderSearchRequest {
     @Length(max = 140)
     private String query;
 
-    private String lang;
-
     private String screenName;
+
+    private String lang;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date until;

@@ -50,12 +50,13 @@ public class HoaxFinderService {
     public List<Tweet> findIfMemberTweetedThisByText(HoaxFinderSearchRequest hoaxFinderSearchRequest) {
         String screenName = hoaxFinderSearchRequest.getScreenName();
         String query = hoaxFinderSearchRequest.getQuery();
+        query = query.length() <= 70 ? query : query.substring(0, 70);
         List<Tweet> tweets = twitter.timelineOperations().getUserTimeline(screenName, 200);
         tweets.sort(Comparator.comparing(Tweet::getCreatedAt));
         List<Tweet> resultList = new ArrayList<>();
 
         for (Tweet tweet : tweets) {
-            if (tweet.getText().contains(query.substring(0, query.length() / 2))) {
+            if (tweet.getText().contains(query)) {
                 resultList.add(tweet);
             }
         }

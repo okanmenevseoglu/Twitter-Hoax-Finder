@@ -14,7 +14,6 @@ import {GrowlModule} from "primeng/primeng";
 import {FormsModule} from "@angular/forms";
 import {ReactiveFormsModule} from "@angular/forms";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {FileUploadComponent} from "./file-upload/file-upload.component";
 import {HttpClientModule} from "@angular/common/http";
 import {RouterModule} from "@angular/router";
 import {appRoutingProviders} from "./app.routing";
@@ -25,7 +24,6 @@ import {LocationStrategy} from "@angular/common";
 @NgModule({
   declarations: [
     AppComponent,
-    FileUploadComponent,
     ImageSearchComponent,
     ResultComponent,
     TextSearchComponent
