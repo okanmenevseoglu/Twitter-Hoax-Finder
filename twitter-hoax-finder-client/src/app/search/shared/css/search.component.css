@@ -1,19 +1,4 @@
-body, html {
-  height: 100%;
-  background: #e6ecf0 no-repeat;
-  font-family: 'Oxygen', sans-serif;
-}
 
-.main {
-  margin-top: 70px;
-}
-
-h1.title {
-  font-size: 50px;
-  font-family: 'Passion One', cursive;
-  font-weight: 400;
-  color: rebeccapurple;
-}
 
 hr {
   width: 10%;
@@ -48,7 +33,6 @@ input::-webkit-input-placeholder {
 
 .main-center {
   margin: 0 auto;
-  max-width: 330px;
   padding: 40px 40px;
 
 }
@@ -67,7 +51,7 @@ input::-webkit-input-placeholder {
   border-color: rebeccapurple;
 }
 
-#welcomeTitle {
+#welcomeSubtitle {
   text-align: center;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-style: italic;

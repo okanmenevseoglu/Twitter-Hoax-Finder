@@ -2,7 +2,7 @@ import {Injectable} from "@angular/core";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs/Observable";
 import "rxjs/Rx";
-import {HoaxFinderSearchRequest} from "./hoax-finder-search-request";
+import {HoaxFinderSearchRequest} from "./search-request";
 import {Tweet} from "../../shared/tweet.model";
 import {ApiRoute} from "../../shared/config/api-route";
 

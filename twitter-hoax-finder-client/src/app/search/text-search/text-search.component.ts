@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {SearchService} from "../shared/search.service";
 import {FormGroup} from "@angular/forms";
 import {FormBuilder} from "@angular/forms";
-import {HoaxFinderSearchRequest} from "../shared/hoax-finder-search-request";
+import {HoaxFinderSearchRequest} from "../shared/search-request";
 import {Tweet} from "../../shared/tweet.model";
 import {Router} from "@angular/router";
 

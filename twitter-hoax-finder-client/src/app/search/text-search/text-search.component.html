@@ -1,89 +1,80 @@
-<div class="container">
-  <div class="row main">
-    <div class="panel-heading">
-      <div class="panel-title text-center">
-        <h1 class="title">Twitter Hoax Finder</h1>
-        <br>
+<div class="col-xs-0 col-md-2"></div>
+<div class="col-xs-12 col-md-8 ">
+  <div *ngIf="!resultTweets" class="main-login main-center">
+    <p id="welcomeSubtitle">Welcome to Twitter Hoax Finder! Please fill below form to find some hoaxes.</p>
+    <form [formGroup]="hoaxFinderSearchForm" (submit)="doSearchForTweets()">
+      <div class="form-group">
+        <label for="query" class="cols-sm-2 control-label">Twitter Query*</label>
+        <div class="cols-sm-10">
+          <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-search fa" aria-hidden="true"></i></span>
+            <textarea pInputTextarea class="form-control" formControlName="query" name="query" id="query"
+                      placeholder="Enter your query for search"></textarea>
+          </div>
+        </div>
       </div>
-    </div>
 
-    <div *ngIf="!resultTweets" class="main-login main-center">
-      <p id="welcomeTitle">Welcome to Twitter Hoax Finder! Please fill below form to find some hoaxes.</p>
-      <form [formGroup]="hoaxFinderSearchForm" (submit)="doSearchForTweets()">
-        <div class="form-group">
-          <label for="query" class="cols-sm-2 control-label">Twitter Query*</label>
-          <div class="cols-sm-10">
-            <div class="input-group">
-              <span class="input-group-addon"><i class="fa fa-search fa" aria-hidden="true"></i></span>
-              <textarea pInputTextarea class="form-control" formControlName="query" name="query" id="query"
-                        placeholder="Enter your query for search"></textarea>
-            </div>
+      <div class="form-group">
+        <label for="screenName" class="cols-sm-2 control-label">Twitter User (Optional)</label>
+        <div class="cols-sm-10">
+          <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
+            <input type="text" class="form-control" formControlName="screenName" name="screenName" id="screenName"
+                   placeholder="Enter Twitter User"/>
           </div>
         </div>
-
-        <div class="form-group">
-          <label for="screenName" class="cols-sm-2 control-label">Twitter User (Optional)</label>
-          <div class="cols-sm-10">
-            <div class="input-group">
-              <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
-              <input type="text" class="form-control" formControlName="screenName" name="screenName" id="screenName"
-                     placeholder="Enter Twitter User"/>
-            </div>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label class="cols-sm-2 control-label">Tweet Language (Optional)</label>
-          <div class="cols-sm-10">
-            <div class="input-group">
-              <span class="input-group-addon"><i class="fa fa-flag fa" aria-hidden="true"></i></span>
-              <p-radioButton formControlName="lang" class="form-control" inputId="lang" name="lang" value="en"
-                             label="English"></p-radioButton>
-              <p-radioButton formControlName="lang" class="form-control" inputId="lang" name="lang" value="tr"
-                             label="Turkish"></p-radioButton>
-            </div>
-          </div>
-        </div>
-
-        <div class="form-group ">
-          <button pButton class="btn btn-primary btn-lg btn-block" id="search" label="Search"></button>
-        </div>
-        <div class="login-register">
-          <a [routerLink]="['image-search']">I want to search image</a>
-        </div>
-      </form>
-    </div>
-
-    <div *ngIf="resultTweets" class="tweet-list">
-      <div class="panel-title text-center">
-        <div *ngIf="resultTweets.length !== 0">
-          <h2 class="title">This is not a hoax!</h2>
-          <h3 class="title">Here is the list of people who tweeted this.</h3>
-        </div>
-        <div *ngIf="resultTweets.length === 0">
-          <h2 class="title">ALERT! THIS IS A POSSIBLE HOAX!</h2>
-        </div>
-        <br>
-
       </div>
-      <div class="tweet-box" *ngFor="let resultTweet of resultTweets" id="{{resultTweet.idStr}}">
-        <a href="https://twitter.com/{{resultTweet.fromUser}}/status/{{resultTweet.idStr}}">
-          <div class="tweet-container">
-            <img class="profile-image" src="{{resultTweet.profileImageUrl}}">
-            <div class="content">
+
+      <div class="form-group">
+        <label class="cols-sm-2 control-label">Tweet Language (Optional)</label>
+        <div class="cols-sm-10">
+          <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-flag fa" aria-hidden="true"></i></span>
+            <p-radioButton formControlName="lang" class="form-control" inputId="lang" name="lang" value="en"
+                           label="English"></p-radioButton>
+            <p-radioButton formControlName="lang" class="form-control" inputId="lang" name="lang" value="tr"
+                           label="Turkish"></p-radioButton>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group ">
+        <button pButton class="btn btn-primary btn-lg btn-block" id="search" label="Search"></button>
+      </div>
+      <div class="login-register">
+        <a [routerLink]="['image-search']">I want to search image</a>
+      </div>
+    </form>
+  </div>
+</div>
+<div class="col-xs-12 col-md-8">
+  <div *ngIf="resultTweets" class="tweet-list">
+    <div class="panel-title text-center">
+      <div *ngIf="resultTweets.length !== 0">
+        <h2 class="title">This is not a hoax!</h2>
+        <h3 class="title">Here is the list of people who tweeted this.</h3>
+      </div>
+      <div *ngIf="resultTweets.length === 0">
+        <h2 class="title">ALERT! THIS IS A POSSIBLE HOAX!</h2>
+      </div>
+      <br>
+
+    </div>
+    <div class="tweet-box" *ngFor="let resultTweet of resultTweets" id="{{resultTweet.idStr}}">
+      <a href="https://twitter.com/{{resultTweet.fromUser}}/status/{{resultTweet.idStr}}">
+        <div class="tweet-container">
+          <img class="profile-image" src="{{resultTweet.profileImageUrl}}">
+          <div class="content">
               <span class="user-fields"><strong>{{resultTweet.fromUser}}</strong><img *ngIf="resultTweet.verified"
                                                                                       class="verified"
                                                                                       src="/images/verified.png"> @{{resultTweet.fromUser}}</span>
-              <p class="tweet-text">{{resultTweet.text}}</p>
-            </div>
+            <p class="tweet-text">{{resultTweet.text}}</p>
           </div>
-        </a>
-      </div>
+        </div>
+      </a>
     </div>
-
   </div>
 </div>
-
 
 <!--<div class="ui-grid-row" *ngIf="resultTweets">-->
 <!--<p-panel header="Sonuçlar" [style]="{'margin':'10px'}">-->
