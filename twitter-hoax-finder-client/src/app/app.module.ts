@@ -2,7 +2,6 @@ import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 
 import {AppComponent} from './app.component';
-import {ResultComponent} from './result/result.component';
 import {TextSearchComponent} from "./search/text-search/text-search.component";
 import {ImageSearchComponent} from "./search/image-search/image-search.component";
 
@@ -26,7 +25,6 @@ import {FileDropModule} from "ngx-file-drop";
   declarations: [
     AppComponent,
     ImageSearchComponent,
-    ResultComponent,
     TextSearchComponent
   ],
   imports: [

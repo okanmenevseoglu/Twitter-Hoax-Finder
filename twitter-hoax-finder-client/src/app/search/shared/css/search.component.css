@@ -34,8 +34,6 @@ input, input::-webkit-input-placeholder {
 }
 
 .btnSearch {
-  background-color: #00B6F1;
-  border-color: #00B6F1;
   height: 40px;
   font-size: 18px;
   font-family: Chalkduster, fantasy;
@@ -46,7 +44,7 @@ input, input::-webkit-input-placeholder {
   font-size: 18px;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-style: italic;
-  color: #2290BF;
+  color: #0084b4;
 }
 
 #searchImage {
@@ -78,31 +76,19 @@ input, input::-webkit-input-placeholder {
   position: relative;
 }
 
-img {
-  vertical-align: middle;
-}
-
-img {
-  border-style: none;
-}
-
-*, *::before, *::after {
-  box-sizing: inherit;
-}
-
 .user-fields {
   display: inline-block;
 }
 
-.fa, .search-title {
-  color: #2290BF;
+.search-title {
+  color: #0084b4;
 }
-
 
 .btn-file {
   position: relative;
   overflow: hidden;
 }
+
 .btn-file input[type=file] {
   position: absolute;
   top: 0;
@@ -117,4 +103,33 @@ img {
   background: white;
   cursor: inherit;
   display: block;
+}
+
+.hoaxResult {
+  font-family: Chalkduster, fantasy;
+}
+
+#backButtons {
+  display: inline;
+}
+
+#btnTextSearch {
+  float: left;
+  width: 50%;
+  border-radius: 0;
+  height: 40px;
+  font-size: 18px;
+  font-family: Chalkduster, fantasy;
+}
+
+#btnImageSearch {
+  width: 50%;
+  border-radius: 0;
+  height: 40px;
+  font-size: 18px;
+  font-family: Chalkduster, fantasy;
+}
+
+#uploadMessage {
+  color: #0084b4;
 }

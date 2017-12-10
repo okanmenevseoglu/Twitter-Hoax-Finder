@@ -1,7 +1,7 @@
 <div class="row main">
   <div class="panel-heading">
     <div class="panel-title text-center">
-      <a [routerLink]="['']" id="welcomeTitleLink">
+      <a href="#" (click)=load() id="welcomeTitleLink">
         <h1 id="welcomeTitle">Twitter Hoax Finder</h1>
       </a>
       <br>
@@ -9,6 +9,7 @@
   </div>
   <router-outlet></router-outlet>
 </div>
+<br>
 <div id="bottomContainer">
   <nav id="bottomNavbar" class="navbar navbar-fixed-bottom">
     <a id="gitHubProfileLink" class="navbar-brand" href="https://github.com/okanmenevseoglu">Okan Menevşeoğlu, 2017.</a>

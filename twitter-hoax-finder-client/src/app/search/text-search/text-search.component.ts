@@ -39,7 +39,7 @@ export class TextSearchComponent implements OnInit {
     this.clear();
   }
 
-  doSearchForTweets() {
+  public doSearchForTweets(): void {
     let hoaxFinderSearchRequest = new HoaxFinderSearchRequest();
 
     hoaxFinderSearchRequest._query = this.hoaxFinderSearchForm.value["query"];
@@ -50,20 +50,24 @@ export class TextSearchComponent implements OnInit {
       this.searchService.searchTextByMember(hoaxFinderSearchRequest).subscribe(tweets => {
         this.resultTweets = tweets;
       }, (error) => {
-        this.msgs = [];
+        this.clear();
         this.msgs.push({severity: 'error', summary: 'Error Message', detail: error.message});
       })
     } else {
       this.searchService.searchText(hoaxFinderSearchRequest).subscribe(tweets => {
         this.resultTweets = tweets;
       }, (error) => {
-        this.msgs = [];
+        this.clear();
         this.msgs.push({severity: 'error', summary: 'Error Message', detail: error.message});
       })
     }
   }
 
-  clear() {
+  public load(): void {
+    location.reload();
+  }
+
+  private clear(): void {
     this.msgs = [];
   }
 }

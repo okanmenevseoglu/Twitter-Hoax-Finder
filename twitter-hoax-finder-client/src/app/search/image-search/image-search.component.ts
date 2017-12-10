@@ -37,7 +37,7 @@ export class ImageSearchComponent implements OnInit {
     this.formData = new FormData;
   }
 
-  dropEvent(event: UploadEvent) {
+  public dropEvent(event: UploadEvent): void {
     this.files = event.files;
     if (this.files.length > 1) {
       this.msgs = [];
@@ -53,7 +53,7 @@ export class ImageSearchComponent implements OnInit {
     }
   }
 
-  fileChangeEvent() {
+  public fileChangeEvent(): void {
     this.formData = new FormData;
     let fileBrowser = this.fileInput.nativeElement;
     if (fileBrowser.files && fileBrowser.files[0]) {
@@ -62,9 +62,13 @@ export class ImageSearchComponent implements OnInit {
     }
   }
 
-  search() {
+  public search(): void {
     this.searchService.searchImage(this.formData).subscribe(tweets => {
       this.resultTweets = tweets;
     }, (error) => this.msgs.push({severity: 'error', summary: 'Error Message', detail: error.message}));
+  }
+
+  public load(): void {
+    location.reload();
   }
 }
