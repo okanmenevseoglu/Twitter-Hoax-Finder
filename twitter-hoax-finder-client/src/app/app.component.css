@@ -1,15 +1,16 @@
 .main {
-  margin-top: 70px;
+  margin-top: 20px;
 }
 
 #welcomeTitle {
-  font-size: 50px;
-  font-family: Helvetica Neue, Helvetica, sans-serif;
+  font-size: 80px;
+  font-variant: small-caps;
+  font-weight: bold;
+  font-family: Chalkduster, fantasy;
+  font-stretch: ultra-expanded;
   color: white;
   background-color: #00B6F1;
-  border-radius: 10px;
-  margin: 0 -9999rem;
-  padding: 0.25rem 9999rem;
+  width: 100%;
 }
 
 #bottomNavbar {
@@ -21,5 +22,14 @@
 }
 
 #gitHubProfileLink:hover {
-  color: purple;
+  color: darkblue;
+}
+
+#welcomeTitleLink {
+  text-decoration: none;
+}
+
+#bottomContainer {
+  display: inline-block;
+  margin-top: 40px;
 }

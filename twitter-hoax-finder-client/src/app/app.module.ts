@@ -20,6 +20,7 @@ import {appRoutingProviders} from "./app.routing";
 import {RoutingModule} from "./app.routing";
 import {HashLocationStrategy} from "@angular/common";
 import {LocationStrategy} from "@angular/common";
+import {FileDropModule} from "ngx-file-drop";
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import {LocationStrategy} from "@angular/common";
     RouterModule,
     RoutingModule,
     FileUploadModule,
-    GrowlModule
+    GrowlModule,
+    FileDropModule
   ],
   providers: [appRoutingProviders,
     {

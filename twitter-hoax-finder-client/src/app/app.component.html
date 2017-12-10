@@ -1,13 +1,15 @@
-<div class="container">
-  <div class="row main">
-    <div class="panel-heading">
-      <div class="panel-title text-center">
+<div class="row main">
+  <div class="panel-heading">
+    <div class="panel-title text-center">
+      <a [routerLink]="['']" id="welcomeTitleLink">
         <h1 id="welcomeTitle">Twitter Hoax Finder</h1>
-        <br>
-      </div>
+      </a>
+      <br>
     </div>
-    <router-outlet></router-outlet>
   </div>
+  <router-outlet></router-outlet>
+</div>
+<div id="bottomContainer">
   <nav id="bottomNavbar" class="navbar navbar-fixed-bottom">
     <a id="gitHubProfileLink" class="navbar-brand" href="https://github.com/okanmenevseoglu">Okan Menevşeoğlu, 2017.</a>
   </nav>

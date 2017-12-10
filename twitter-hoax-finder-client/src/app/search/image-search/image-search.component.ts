@@ -4,6 +4,8 @@ import {ElementRef} from "@angular/core";
 import {SearchService} from "../shared/search.service";
 import {Message} from "primeng/primeng";
 import {Tweet} from "../../shared/tweet.model";
+import {UploadFile} from "ngx-file-drop";
+import {UploadEvent} from "ngx-file-drop";
 
 @Component({
   selector: 'app-image-search',
@@ -13,26 +15,56 @@ import {Tweet} from "../../shared/tweet.model";
 })
 export class ImageSearchComponent implements OnInit {
 
+  uploadMessage: string;
+
   msgs: Message[];
+
+  resultTweets: Tweet[];
 
   @ViewChild('fileInput') fileInput: ElementRef;
 
-  resultTweets: Tweet[];
+  public files: UploadFile[];
+
+  formData: FormData;
 
   constructor(private searchService: SearchService) {
   }
 
   ngOnInit() {
+    this.uploadMessage = 'Please choose or drop an image file to upload';
+    this.files = [];
+    this.msgs = [];
+    this.formData = new FormData;
   }
 
-  upload() {
+  dropEvent(event: UploadEvent) {
+    this.files = event.files;
+    if (this.files.length > 1) {
+      this.msgs = [];
+      this.msgs.push({severity: 'error', summary: 'Error Message', detail: "Please choose only one image file."});
+    } else {
+      let fileEntry = event.files[0].fileEntry;
+      if (fileEntry) {
+        fileEntry.file(data => {
+          this.formData.append("image", data);
+        });
+        this.uploadMessage = fileEntry.name;
+      }
+    }
+  }
+
+  fileChangeEvent() {
+    this.formData = new FormData;
     let fileBrowser = this.fileInput.nativeElement;
     if (fileBrowser.files && fileBrowser.files[0]) {
-      const formData = new FormData();
-      formData.append("image", fileBrowser.files[0]);
-      this.searchService.searchImage(formData).subscribe(tweets => {
-        this.resultTweets = tweets;
-      }, (error) => console.log(error));
+      this.formData.append("image", fileBrowser.files[0]);
+      this.uploadMessage = fileBrowser.files[0].name;
     }
+  }
+
+  search() {
+    this.searchService.searchImage(this.formData).subscribe(tweets => {
+      this.resultTweets = tweets;
+    }, (error) => this.msgs.push({severity: 'error', summary: 'Error Message', detail: error.message}));
   }
 }
