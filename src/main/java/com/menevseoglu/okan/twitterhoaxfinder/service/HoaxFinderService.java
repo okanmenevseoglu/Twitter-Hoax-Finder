@@ -2,6 +2,7 @@ package com.menevseoglu.okan.twitterhoaxfinder.service;
 
 import com.menevseoglu.okan.twitterhoaxfinder.request.HoaxFinderSearchRequest;
 import com.menevseoglu.okan.twitterhoaxfinder.utils.ImageUtils;
+import com.menevseoglu.okan.twitterhoaxfinder.utils.TweetLanguage;
 import net.sourceforge.tess4j.Tesseract1;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,7 @@ import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.LogRecord;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 @Service
 public class HoaxFinderService {
@@ -44,7 +46,10 @@ public class HoaxFinderService {
 
         List<Tweet> tweets = searchTweets(searchParameters);
 
-        return getWhoTweetedQueryResultList(tweets);
+        return getWhoTweetedQueryResultList(tweets)
+                .stream()
+                .distinct()
+                .collect(Collectors.toList());
     }
 
     public List<Tweet> findIfMemberTweetedThisByText(HoaxFinderSearchRequest hoaxFinderSearchRequest) {
@@ -63,19 +68,22 @@ public class HoaxFinderService {
         return resultList;
     }
 
-    public List<Tweet> findWhoTweetedItByImage(MultipartFile image) {
-        String query = doOCRAndGetStringResult(image);
+    public List<Tweet> findWhoTweetedItByImage(MultipartFile image, String lang) {
+        TweetLanguage tweetLanguage = Enum.valueOf(TweetLanguage.class, lang);
+        String query = doOCRAndGetStringResult(image, tweetLanguage.getLabel());
+
         HoaxFinderSearchRequest hoaxFinderSearchRequest = new HoaxFinderSearchRequest();
         hoaxFinderSearchRequest.setQuery(query);
+        hoaxFinderSearchRequest.setLang(lang);
+
         return findWhoTweetedItByText(hoaxFinderSearchRequest);
     }
 
     private SearchParameters bindSearchRequestForSearch(HoaxFinderSearchRequest hoaxFinderSearchRequest) {
         SearchParameters searchParameters = new SearchParameters(hoaxFinderSearchRequest.getQuery());
-        searchParameters.lang(hoaxFinderSearchRequest.getLang());
         searchParameters.count(100);
-        searchParameters.until(hoaxFinderSearchRequest.getUntil());
-        searchParameters.includeEntities(true);
+        TweetLanguage tweetLanguage = Enum.valueOf(TweetLanguage.class, hoaxFinderSearchRequest.getLang());
+        searchParameters.lang(tweetLanguage.getLabel());
         return searchParameters;
     }
 
@@ -124,7 +132,7 @@ public class HoaxFinderService {
         return tweet;
     }
 
-    private String doOCRAndGetStringResult(MultipartFile image) {
+    private String doOCRAndGetStringResult(MultipartFile image, String lang) {
         String result = "";
 
         try {
@@ -132,7 +140,7 @@ public class HoaxFinderService {
             File imageFile = new File(imageToRecognize);
             BufferedImage img = ImageIO.read(imageFile);
             Tesseract1 tesseract = new Tesseract1();
-            tesseract.setLanguage("eng");
+            tesseract.setLanguage(lang);
             tesseract.setDatapath("src/main/resources/tessdata/");
             result = tesseract.doOCR(img);
         } catch (Exception e) {

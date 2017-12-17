@@ -3,12 +3,8 @@ package com.menevseoglu.okan.twitterhoaxfinder.controller;
 import com.menevseoglu.okan.twitterhoaxfinder.request.HoaxFinderSearchRequest;
 import com.menevseoglu.okan.twitterhoaxfinder.service.HoaxFinderService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.social.twitter.api.Tweet;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
@@ -39,8 +35,8 @@ public class HoaxFinderRestController {
         return hoaxFinderService.findIfMemberTweetedThisByText(hoaxFinderSearchRequest);
     }
 
-    @PostMapping("search/image")
-    public List<Tweet> findWhoTweetedItByImage(@Param("image") MultipartFile image) {
-        return hoaxFinderService.findWhoTweetedItByImage(image);
+    @PostMapping("search/image/{lang}")
+    public List<Tweet> findWhoTweetedItByImage(@RequestBody MultipartFile image, @PathVariable String lang) {
+        return hoaxFinderService.findWhoTweetedItByImage(image, lang);
     }
 }

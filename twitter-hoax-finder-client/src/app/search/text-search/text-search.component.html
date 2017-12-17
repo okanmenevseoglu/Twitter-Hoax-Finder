@@ -27,16 +27,14 @@
       </div>
 
       <div class="form-group">
-        <label class="cols-sm-2 control-label search-title">Tweet Language (Optional)</label>
+        <label class="cols-sm-2 control-label search-title">Tweet Language</label>
         <div class="cols-sm-10">
           <div class="input-group">
             <span class="input-group-addon"><i class="fa fa-flag fa" aria-hidden="true"></i></span>
             <p-radioButton formControlName="lang" class="form-control search-title" inputId="lang" name="lang"
-                           value="en" [(ngModel)]="tweetLang"
-                           label="English"></p-radioButton>
+                           value="EN" [(ngModel)]="tweetLang" label="English"></p-radioButton>
             <p-radioButton formControlName="lang" class="form-control search-title" inputId="lang" name="lang"
-                           value="tr" [(ngModel)]="tweetLang"
-                           label="Turkish"></p-radioButton>
+                           value="TR" [(ngModel)]="tweetLang" label="Turkish"></p-radioButton>
           </div>
         </div>
       </div>

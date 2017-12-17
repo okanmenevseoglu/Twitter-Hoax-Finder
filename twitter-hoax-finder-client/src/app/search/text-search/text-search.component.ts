@@ -23,7 +23,7 @@ export class TextSearchComponent implements OnInit {
 
   verified: boolean = false;
 
-  tweetLang: string;
+  tweetLang: string = 'EN';
 
   constructor(private searchService: SearchService, private messageService: MessageService, private formBuilder: FormBuilder) {
     this.hoaxFinderSearchForm = this.formBuilder.group({
@@ -31,7 +31,6 @@ export class TextSearchComponent implements OnInit {
       screenName: null,
       lang: ['']
     });
-    this.tweetLang = null;
   }
 
   ngOnInit() {

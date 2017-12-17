@@ -15,7 +15,7 @@ export class ApiRoute {
   }
 
 
-  public static getSearchImageURL(): string {
-    return this.baseEndPoint + 'search/image';
+  public static getSearchImageURL(lang: string): string {
+    return this.baseEndPoint + 'search/image/' + lang;
   }
 }

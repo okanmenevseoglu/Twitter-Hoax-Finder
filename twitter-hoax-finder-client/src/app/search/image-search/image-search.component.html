@@ -5,8 +5,8 @@
     <p id="welcomeSubtitle">Welcome to Twitter Hoax Finder! Please choose a tweet image to find some hoaxes.</p>
     <div>
       <div class="center">
-        <file-drop (onFileDrop)="dropEvent($event)">
-          <form>
+        <form>
+          <file-drop (onFileDrop)="dropEvent($event)">
             <div align="center">
               <label class="control-label" id="uploadMessage">{{uploadMessage}}</label>
               <span class="btn btn-info btn-default btn-file btnSearch">
@@ -14,8 +14,19 @@
                 Browse <input type="file" #fileInput (change)="fileChangeEvent()">
               </span>
             </div>
-          </form>
-        </file-drop>
+          </file-drop>
+          <br>
+          <label class="cols-sm-2 control-label search-title">Tweet Language</label>
+          <div class="cols-sm-10">
+            <div class="input-group">
+              <span class="input-group-addon"><i class="fa fa-flag fa" aria-hidden="true"></i></span>
+              <p-radioButton class="form-control search-title" inputId="lang" name="lang" value="EN" [(ngModel)]="lang"
+                             label="English"></p-radioButton>
+              <p-radioButton class="form-control search-title" inputId="lang" name="lang" value="TR" [(ngModel)]="lang"
+                             label="Turkish"></p-radioButton>
+            </div>
+          </div>
+        </form>
         <br>
       </div>
       <button type="button" class="btn btn-success btn-lg btn-block btnSearch" (click)="search()">SEARCH</button>

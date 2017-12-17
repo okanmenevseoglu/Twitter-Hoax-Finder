@@ -27,6 +27,8 @@ export class ImageSearchComponent implements OnInit {
 
   formData: FormData;
 
+  lang: string = 'EN';
+
   constructor(private searchService: SearchService) {
   }
 
@@ -63,7 +65,7 @@ export class ImageSearchComponent implements OnInit {
   }
 
   public search(): void {
-    this.searchService.searchImage(this.formData).subscribe(tweets => {
+    this.searchService.searchImage(this.formData, this.lang).subscribe(tweets => {
       this.resultTweets = tweets;
     }, (error) => this.msgs.push({severity: 'error', summary: 'Error Message', detail: error.message}));
   }

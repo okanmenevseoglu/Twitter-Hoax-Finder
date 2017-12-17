@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs/Observable";
 import "rxjs/Rx";
 import {HoaxFinderSearchRequest} from "./search-request";
@@ -27,10 +27,8 @@ export class SearchService {
       .map(res => <Tweet[]> res);
   }
 
-  searchImage(formData: FormData): Observable<Tweet[]> {
-    let headers = new HttpHeaders();
-    headers.append('Accept', 'application/json');
-    return this.httpClient.post(ApiRoute.getSearchImageURL(), formData, {headers: headers})
+  searchImage(formData: FormData, lang: string): Observable<Tweet[]> {
+    return this.httpClient.post(ApiRoute.getSearchImageURL(lang), formData)
       .map(res => <Tweet[]> res);
   }
 }
